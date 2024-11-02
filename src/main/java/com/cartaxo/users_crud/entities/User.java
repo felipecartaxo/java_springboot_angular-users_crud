@@ -1,13 +1,11 @@
 package com.cartaxo.users_crud.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Objects;
 
 @Entity // Determina que esta classe é uma entidade no nosso banco
+@Table(name="tb_user")
 public class User {
 
     @Id // Determina que o atributo a seguir é a chave primária da entidade
