@@ -4,25 +4,27 @@ import jakarta.persistence.*;
 
 import java.util.Objects;
 
-@Entity // Determina que esta classe é uma entidade no nosso banco
-@Table(name="tb_user")
+@Entity // Determina que esta classe é uma entidade do nosso banco
+@Table(name="tb_user") // Alteramos o nome da tabela que será criada no banco, mas, por padrão, o nome seria o mesmo nome da classe
 public class User {
-
     @Id // Determina que o atributo a seguir é a chave primária da entidade
-    @GeneratedValue(strategy = GenerationType.AUTO) // E como essa chave será gerada
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Determina que o valor do id será autoincrementado a cada registro
     private Long id;
     private String name;
     private String email;
 
-    public User() { // O construtor vazio é obrigatório para o Spring Boot
+    // Construtor padrão (este construtor é obrigatório para o Spring Boot)
+    public User() {
     }
 
+    // Construtor com parâmetros
     public User(Long id, String name, String email) {
         this.id = id;
         this.name = name;
         this.email = email;
     }
 
+    // Getters e setters
     public Long getId() {
         return id;
     }
@@ -60,6 +62,7 @@ public class User {
         return Objects.hashCode(id);
     }
 
+    // toString()
     @Override
     public String toString() {
         return "User{" +
