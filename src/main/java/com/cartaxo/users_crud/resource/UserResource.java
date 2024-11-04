@@ -3,6 +3,7 @@ package com.cartaxo.users_crud.resource;
 import com.cartaxo.users_crud.entities.User;
 import com.cartaxo.users_crud.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,9 +28,25 @@ public class UserResource {
         return service.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
     }
 
+    // Insere um novo usuário
     @PostMapping // Este método será chamado quando uma requisição HTTP do tipo POST for feita para /api/users. É utilizado para criar um novo usuário
     // Cria um usuário
     public User createUser(@RequestBody User user) { // Determina que o corpo da requisição será transformado em uma instância da classe User e passado para o método
         return service.createUser(user); // Retorna o usuário criado
+    }
+
+    // Atualiza/edita informações de um usuário existente
+    @PutMapping("/{id}") // Responde a requisições do tipo PUT feitas para /api/users/{id}. Neste caso, irá atualizar os dados do id do usuário passado na URL
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User obj) {
+        obj = service.updateUser(id, obj);
+        return ResponseEntity.ok().body(obj);
+    }
+
+    @DeleteMapping("/{id}") // Responde a requisições do tipo DELETE feitas para /api/users/{id}. Neste caso, irá remover o usuário cujo id for igual ao id passado na URL
+    // Remove um usuário
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        service.deleteUser(id);
+
+        return ResponseEntity.noContent().build();
     }
 }
