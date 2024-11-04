@@ -8,7 +8,7 @@ import java.util.Objects;
 @Table(name="tb_user") // Alteramos o nome da tabela que será criada no banco, mas, por padrão, o nome seria o mesmo nome da classe
 public class User {
     @Id // Determina que o atributo a seguir é a chave primária da entidade
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Determina que o valor do id será autoincrementado a cada registro
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Determina que o valor do id será autoincrementado a cada registro. Desta forma, ao apagar um usuário, a aplicação continuará a contagem. Por exemplo, se tivermos 3 usuários e apagarmos o usuário de id 3, o id do próximo usuário cadastrado será 4, mesmo que o id 3 esteja disponível
     private Long id;
     private String name;
     private String email;

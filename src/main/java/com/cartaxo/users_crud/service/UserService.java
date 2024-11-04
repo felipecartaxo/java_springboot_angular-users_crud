@@ -36,4 +36,9 @@ public class UserService {
 
         return repository.save(entity);
     }
+
+    // Remove um usuário registrado a partir do id
+    public void deleteUser(Long id) {
+        repository.deleteById(id);
+    }
 }
